@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Category;
 use Illuminate\Http\Request;
 use Auth;
 use Hash;
@@ -84,6 +85,7 @@ class UserController extends Controller
         return back()->with($notification);
     }
 
+    
     
 
 }
