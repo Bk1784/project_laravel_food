@@ -80,9 +80,21 @@ class CategoryController extends Controller
                 'alert-type' => 'success'
             );
         return redirect()->route('all.category')->with($notification);
-
         }
-        
+    }
+
+    public function DeleteCategory($id){
+        $item = Category::find($id);
+        $img = $item->image;
+        unlink($img);
+
+        $item = Category::find($id)->delete();
+
+        $notification = array(
+            'message' => 'Category Deleted succesfully',
+            'alert-type' => 'success'
+        );
+    return redirect()->back()->with($notification);
     }
 
 

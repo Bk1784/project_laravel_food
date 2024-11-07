@@ -77,5 +77,6 @@ Route::middleware('admin')->group(function () {
         Route::post('/store/category', 'StoreCategory')->name('category.store');
         Route::get('/edit/category/{id}', 'EditCategory')->name('edit.category');
         Route::post('/update/category', 'UpdateCategory')->name('category.update');
+        Route::get('/delete/category/{id}', 'DeleteCategory')->name('delete.category');
     }); 
 });
