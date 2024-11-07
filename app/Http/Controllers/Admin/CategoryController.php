@@ -10,6 +10,7 @@ use App\Mail\Websitemail;
 use App\Models\Category;
 use Intervention\Image\Drivers\Gd\Driver;
 use Intervention\Image\ImageManager;
+use App\Models\City;
 
 class CategoryController extends Controller
 {
@@ -96,6 +97,15 @@ class CategoryController extends Controller
         );
     return redirect()->back()->with($notification);
     }
+
+    /// all city method in here
+
+    public function AllCity(){
+        $city = City::latest()->get();
+        return view('admin.backend.city.all_city', compact('city'));
+    }
+
+
 
 
 }
