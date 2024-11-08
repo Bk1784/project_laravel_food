@@ -51,7 +51,7 @@
 
                     <li>
                         <a href="{{ route('add.category') }}">
-                            <span data-key="t-chat">Add Category</span>
+                            <span data-key="t-chat">Add City</span>
                         </a>
                     </li>
                 </ul>

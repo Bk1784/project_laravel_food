@@ -46,7 +46,7 @@
                                         <td>{{ $item->category_name }}</td>
                                         <td><img src="{{asset($item->image)}}" alt="" style="width: 70px; height:40px;"></td>
                                         <td><a href="{{ route('edit.category', $item->id) }}" class="btn btn-info waves-effect waves-light">Edit</a>
-                                        <a href="{{ route('delete.category', $item->id) }}" class="btn btn-danger waves-effect waves-light" id="delete">Delete</a></td>
+                                        <a href="{{ route('delete.category', $item->id) }}" class="btn btn-danger waves-effect waves-light" id="">Delete</a></td>
                                     </tr>
                                     @endforeach
                                     
