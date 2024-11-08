@@ -123,4 +123,28 @@ class CategoryController extends Controller
         $city = City::find($id);
         return response()->json($city);
     }
+
+    public function UpdateCity(Request $request){
+        $cat_id = $request->cat_id;
+        City::find($cat_id)->update([
+            'city_name' => $request->city_name,
+            'city_slug' => strtolower(str_replace('','-',$request->city_name)),
+        ]);
+    
+    $notification = array(
+        'message' => 'Category Updated succesfully',
+        'alert-type' => 'success'
+    );
+return redirect()->back()->with($notification);
+}
+
+public function DeleteCity($id){
+    City::find($id)->delete();
+
+    $notification = array(
+        'message' => 'City Deleted Successfully',
+        'alert-type' => 'success'
+    );
+    return redirect()->back()->with($notification);
+}
 }
