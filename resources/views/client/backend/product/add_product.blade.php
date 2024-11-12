@@ -28,14 +28,14 @@
                             <div class="col-xl-12 col-lg-12">
 <div class="card">
 <div class="card-body p-4">
-<form id="myform" action="{{ route ('menu.store' )}}" method="post" enctype="multipart/form-data">
+<form id="myForm" action="{{ route ('product.store' )}}" method="post" enctype="multipart/form-data">
     @csrf
     
         <div class="row">
             <div class="col-xl-4 col-md-6">
                     <div class="form-group mb-3">
                         <label for="example-text-input" class="form-label">Category Name</label>
-                        <select class="form-select">
+                        <select name="category_id" class="form-select">
                             <option>Select</option>
                             @foreach ($category as $cat)
                             <option value="{{ $cat->id }}">{{ $cat->category_name}}</option>
@@ -46,8 +46,8 @@
             <div class="col-xl-4 col-md-6">
                     <div class="form-group mb-3">
                         <label for="example-text-input" class="form-label">Menu Name</label>
-                        <select class="form-select">
-                            <option>Select</option>
+                        <select name="menu_id" class="form-select">
+                            <option selected="" disabled="">Select</option>
                             @foreach ($menu as $men)
                             <option value="{{ $men->id }}">{{ $men->menu_name}}</option>
                             @endforeach
@@ -57,7 +57,7 @@
             <div class="col-xl-4 col-md-6">
                     <div class="form-group mb-3">
                         <label for="example-text-input" class="form-label">City Name</label>
-                        <select class="form-select">
+                        <select name="city_id" class="form-select">
                             <option>Select</option>
                             @foreach ($city as $cit)
                             <option value="{{ $cit->id }}">{{ $cit->city_name}}</option>
@@ -68,31 +68,31 @@
             <div class="col-xl-4 col-md-6">
                     <div class="form-group mb-3">
                         <label for="example-text-input" class="form-label">Product Name</label>
-                        <input class="form-control" name="menu_name" type="text"  id="example-text-input">
+                        <input class="form-control" name="name" type="text"  id="example-text-input">
                     </div>
             </div>
             <div class="col-xl-4 col-md-6">
                     <div class="form-group mb-3">
                         <label for="example-text-input" class="form-label">Product Price</label>
-                        <input class="form-control" name="menu_name" type="text"  id="example-text-input">
+                        <input class="form-control" name="price" type="text"  id="example-text-input">
                     </div>
             </div>
             <div class="col-xl-4 col-md-6">
                     <div class="form-group mb-3">
                         <label for="example-text-input" class="form-label">Discount Price</label>
-                        <input class="form-control" name="menu_name" type="text"  id="example-text-input">
+                        <input class="form-control" name="discount_prize" type="text"  id="example-text-input">
                     </div>
             </div>
             <div class="col-xl-6 col-md-6">
                     <div class="form-group mb-3">
                         <label for="example-text-input" class="form-label"> Size</label>
-                        <input class="form-control" name="menu_name" type="text"  id="example-text-input">
+                        <input class="form-control" name="size" type="text"  id="example-text-input">
                     </div>
             </div>
             <div class="col-xl-6 col-md-6">
                     <div class="form-group mb-3">
                         <label for="example-text-input" class="form-label">Product QTY</label>
-                        <input class="form-control" name="menu_name" type="text"  id="example-text-input">
+                        <input class="form-control" name="qty" type="text"  id="example-text-input">
                     </div>
             </div>
             <div class="col-xl-6 col-md-6">
@@ -103,21 +103,20 @@
             </div>
             <div class="col-xl-6 col-md-6">
                     <div class="form-group mb-3">
-                        <label for="example-text-input" class="form-label">Product QTY</label>
                         <img id="showImage" src="{{url('upload/poto_filmBagus.jpg') }}" alt="" class="rounded-circle p-1 bg-primary" width="110">
                     </div>
             </div>
             <div class="form-check mt-2" >
-                <input class="form-check-input" type="checkbox" id="formCheck2" >
+                <input class="form-check-input" name="best_seller" type="checkbox" id="formCheck2" value="1">
                 <label for="form-check-label" for="formCheck2">
                     Best Seller
                 </label>
             </div>
             
             <div class="form-check mt-2">
-                <input class="form-check-input" type="checkbox" id="formCheck2" >
+                <input class="form-check-input" name="most_populer" type="checkbox" id="formCheck2" value="1">
                 <label for="form-check-label" for="formCheck2">
-                    Special Offer
+                    Most Populer
                 </label>
             </div>
             <div class="mt-4">
@@ -160,20 +159,26 @@
     $(document).ready(function (){
         $('#myForm').validate({
             rules: {
-                category_name: {
+                name: {
                     required : true,
                 }, 
                 image: {
+                    required : true,
+                }, 
+                menu_id: {
                     required : true,
                 }, 
                 
             },
             messages :{
-                category_name: {
-                    required : 'Please Enter Category Name',
+                name: {
+                    required : 'Please Enter Name',
                 }, 
                 image: {
                     required : 'Please Select Image',
+                }, 
+                menu_id: {
+                    required : 'Please Select One Menu',
                 }, 
                  
 
