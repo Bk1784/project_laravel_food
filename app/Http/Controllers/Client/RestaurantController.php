@@ -3,12 +3,14 @@ namespace App\Http\Controllers\Client;
 use App\Http\Controllers\Controller;
 use App\Models\City;
 use App\Models\Product;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth; 
 use App\Models\Category;
 use Intervention\Image\ImageManager;
 use Intervention\Image\Drivers\Gd\Driver; 
 use App\Models\Menu;
+use Haruncpi\LaravelIdGenerator\IdGenerator;
 class RestaurantController extends Controller
 {
     public function AllMenu(){
@@ -105,7 +107,40 @@ class RestaurantController extends Controller
         return view('client.backend.product.add_product', compact('category','city', 'menu'));
     } 
 
-    public function StoreProduct(){
-        
+    public function StoreProduct(Request $request){
+        $pcode = IdGenerator::generate(['table' => 'products', 'field' => 'code', 'length' => 5, 'prefix' => 'PC']);
+
+        if($request->file('image')){
+            $image = $request->file('image');
+            $manager = new ImageManager(new Driver());
+            $name_gen = hexdec(uniqid()).'.'. $image->getClientOriginalExtension();
+            $img = $manager->read($image);
+            $img->resize(300,300)->save(public_path('upload/product/'.$name_gen));
+            $save_url = 'upload/product/'.$name_gen;
+
+            Product::create([
+                'name' => $request->name,
+                'slug' => strtolower(str_replace('','-',$request->name)),
+                'category_id' => $request->category_id,
+                'city_id' => $request->city_id,
+                'menu_id' => $request->menu_id,
+                'code' => $pcode,
+                'qty' => $request->qty,
+                'size' => $request->size,
+                'price' => $request->price,
+                'discount_prize' => $request->discount_prize,
+                'client_id' => Auth::guard('client')->id(),
+                'most_populer' => $request->most_populer,
+                'best_seller' => $request->best_seller,
+                'status' => 1,
+                'created_at' => Carbon::now(),
+                'image' => $save_url,
+            ]);
+        }
+        $notification = array(
+            'message' => 'Product Inserted succesfully',
+            'alert-type' => 'success'
+        );
+    return redirect()->route('all.product')->with($notification);
     }
 }
