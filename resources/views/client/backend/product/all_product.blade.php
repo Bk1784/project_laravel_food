@@ -62,7 +62,7 @@
                     <span class="text-danger"><b>InActive</b></span>
                     @endif
                 </td>
-                <td><a href="{{ route('edit.menu',$item->id) }}" class="btn btn-info waves-effect waves-light"><i class="fas fa-edit"></i></a>
+                <td><a href="{{ route('edit.product',$item->id) }}" class="btn btn-info waves-effect waves-light"><i class="fas fa-edit"></i></a>
                 <a href="{{ route('delete.menu',$item->id) }}" class="btn btn-danger waves-effect waves-light" id="delete"><i class="fas fa-trash"></i></a>
                 </td> 
             </tr>
