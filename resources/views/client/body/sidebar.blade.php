@@ -44,7 +44,7 @@
                 </a>
                 <ul class="sub-menu" aria-expanded="false">
                     <li>
-                        <a href="{{ route('all.menu') }}">
+                        <a href="{{ route('all.product') }}">
                             <span data-key="t-calendar">All Product</span>
                         </a>
                     </li>
