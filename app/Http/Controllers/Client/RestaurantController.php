@@ -1,6 +1,7 @@
 <?php
 namespace App\Http\Controllers\Client;
 use App\Http\Controllers\Controller;
+use App\Models\City;
 use App\Models\Product;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth; 
@@ -96,5 +97,11 @@ class RestaurantController extends Controller
     public function AllProduct(){
         $product = Product::latest()->get();
         return view('client.backend.product.all_product', compact('product'));
+    } 
+    public function AddProduct(){
+        $category = Category::latest()->get();
+        $city = City::latest()->get();
+        $menu = Menu::latest()->get();
+        return view('client.backend.product.add_product', compact('category','city', 'menu'));
     } 
 }

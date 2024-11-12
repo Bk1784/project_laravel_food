@@ -50,7 +50,7 @@
                     </li>
 
                     <li>
-                        <a href="{{ route('add.menu') }}">
+                        <a href="{{ route('add.product') }}">
                             <span data-key="t-chat">Add Product</span>
                         </a>
                     </li>
