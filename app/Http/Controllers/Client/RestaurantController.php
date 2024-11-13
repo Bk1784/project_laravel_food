@@ -150,9 +150,10 @@ class RestaurantController extends Controller
     }
 
     public function EditProduct( $id){
+        $cid = Auth::guard('client')->id();
         $category = Category::latest()->get();
         $city = City::latest()->get();
-        $menu = Menu::where('client_id',$id)->latest()->get();
+        $menu = Menu::where('client_id',$cid)->latest()->get();
         $product = Product::find($id);
         return view('client.backend.product.edit_product', compact('category','city', 'menu', 'product'));
     }
@@ -234,7 +235,8 @@ class RestaurantController extends Controller
 
     //all gallery method
     public function AllGallery(){
-        $gallery = Gallery::latest()->get();
+        $cid = Auth::guard('client')->id();
+        $gallery = Gallery::where('client_id',$cid)->latest()->get();
         return view('client.backend.gallery.all_gallery', compact('gallery'));
     } 
     public function AddGallery(){
