@@ -60,7 +60,7 @@
             <li>
                 <a href="javascript: void(0);" class="has-arrow">
                     <i data-feather="grid"></i>
-                    <span data-key="t-apps">Product</span>
+                    <span data-key="t-apps">Gallery</span>
                 </a>
                 <ul class="sub-menu" aria-expanded="false">
                     <li>
@@ -70,7 +70,7 @@
                     </li>
 
                     <li>
-                        <a href="{{ route('add.product') }}">
+                        <a href="{{ route('add.gallery') }}">
                             <span data-key="t-chat">Add Gallery</span>
                         </a>
                     </li>

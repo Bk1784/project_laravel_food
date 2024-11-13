@@ -9,7 +9,7 @@
                     <h4 class="mb-sm-0 font-size-18">All Gallery</h4>
                     <div class="page-title-right">
                         <ol class="breadcrumb m-0">
-                            <a href="{{ route('add.menu') }}" class="btn btn-primary waves-effect waves-light">Add Gallery</a>
+                            <a href="{{ route('add.gallery') }}" class="btn btn-primary waves-effect waves-light">Add Gallery</a>
                         </ol>
                     </div>
                 </div>

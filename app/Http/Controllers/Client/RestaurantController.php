@@ -233,4 +233,29 @@ class RestaurantController extends Controller
         $gallery = Gallery::latest()->get();
         return view('client.backend.gallery.all_gallery', compact('gallery'));
     } 
+    public function AddGallery(){
+        return view('client.backend.gallery.add_gallery');
+    } 
+
+    public function StoreGallery( Request $request){
+        $images = $request->file('gallery_img');
+        foreach($images as $gimg){
+            $manager = new ImageManager(new Driver());
+            $name_gen = hexdec(uniqid()).'.'. $gimg->getClientOriginalExtension();
+            $img = $manager->read($gimg);
+            $img->resize(500,500)->save(public_path('upload/gallery/'.$name_gen));
+            $save_url = 'upload/gallery/'.$name_gen;
+
+            Gallery::insert([
+                'client_id' => Auth::guard('client')->id(),
+                'gallery_img' => $save_url,
+            ]);
+        }//end foreach
+        $notification = array(
+            'message' => 'Product Inserted Successfully',
+            'alert-type' => 'success'
+        );
+
+        return redirect()->route('all.gallery')->with($notification);
+    }
 }
