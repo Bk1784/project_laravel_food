@@ -258,4 +258,58 @@ class RestaurantController extends Controller
 
         return redirect()->route('all.gallery')->with($notification);
     }
+    public function EditGallery($id){
+        $gallery = Gallery::find($id);
+        return view('client.backend.gallery.edit_gallery', compact('gallery'));
+    }
+
+    public function UpdateGallery(Request $request){
+        $gallery_id = $request->id;
+        if ($request->hasFile('gallery_img')) {
+            $image = $request->file('gallery_img');
+            $manager = new ImageManager(new Driver());
+            $name_gen = hexdec(uniqid()).'.'.$image->getClientOriginalExtension();
+            $img = $manager->read($image);
+            $img->resize(500,500)->save(public_path('upload/gallery/'.$name_gen));
+            $save_url = 'upload/gallery/'.$name_gen;
+            $gallery = Gallery::find($gallery_id);
+            if ($gallery->gallery_img) {
+                $img = $gallery->gallery_img;
+                unlink($img);
+            }
+            $gallery->update([
+                'gallery_img' => $save_url,
+            ]);
+ 
+            $notification = array(
+                'message' => 'Menu Updated Successfully',
+                'alert-type' => 'success'
+            );
+    
+            return redirect()->route('all.gallery')->with($notification);
+        } else {
+            $notification = array(
+                'message' => 'No Image Selected for Update',
+                'alert-type' => 'warning'
+            );
+    
+            return redirect()->back()->with($notification); 
+        } 
+    }
+    // End Method 
+
+    public function DeleteGallery($id){
+        $item = Gallery::find($id);
+        $img = $item->gallery_img;
+        unlink($img);
+
+        $item = Gallery::find($id)->delete();
+
+        $notification = array(
+            'message' => 'Gallery Menu Deleted succesfully',
+            'alert-type' => 'success'
+        );
+    return redirect()->back()->with($notification);
+    }
+
 }
