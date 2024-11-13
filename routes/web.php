@@ -141,9 +141,9 @@ Route::middleware('admin')->group(function () {
             Route::get('/all/coupon', 'AllCoupon')->name('all.coupon');
             Route::get('/add/coupon', 'AddCoupon')->name('add.coupon');
             Route::post('/store/coupon', 'StoreCoupon')->name('coupon.store');
-            Route::get('/edit/gallery/{id}', 'EditGallery')->name('edit.gallery');
-            Route::post('/update/gallery', 'UpdateGallery')->name('gallery.update');
-            Route::get('/delete/gallery/{id}', 'DeleteGallery')->name('delete.gallery');
+            Route::get('/edit/coupon/{id}', 'EditCoupon')->name('edit.coupon');
+            Route::post('/update/coupon', 'UpdateCoupon')->name('coupon.update');
+            Route::get('/delete/coupon/{id}', 'DeleteCoupon')->name('delete.coupon');
             
         });
     });
