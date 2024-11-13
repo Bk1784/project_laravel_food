@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\City;
 use Auth;
 use Hash;
 use Illuminate\Http\Request;
@@ -66,9 +67,10 @@ class ClientController extends Controller
     }
 
     public function ClientProfile(){
+        $city = City::latest()->get();
         $id = Auth::guard('client')->id();
         $profileData = Client::find($id);
-        return view('client.client_profile', compact('profileData'));
+        return view('client.client_profile', compact('profileData', 'city'));
     }
 
     public function ClientProfileStore(Request $request){
