@@ -81,6 +81,8 @@ class ClientController extends Controller
         $data->email = $request->email;
         $data->phone = $request->phone;
         $data->address = $request->address;
+        $data->city_id = $request->city_id;
+        $data->shop_info = $request->shop_info; 
 
         $oldPhotoPath = $data->photo;
 
@@ -94,6 +96,12 @@ class ClientController extends Controller
                 $this->deleteOldImage($oldPhotoPath);
             }
         }
+        if ($request->hasFile('cover_photo')) {
+            $file1 = $request->file('cover_photo');
+            $filename1 = time().'.'.$file1->getClientOriginalExtension();
+            $file1->move(public_path('upload/client_images'),$filename1);
+            $data->cover_photo = $filename1; 
+         }
         $data->save();
         $notification = array(
             'message' => 'Profile Update Successfully',
