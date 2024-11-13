@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Client\CouponController;
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AdminController;
@@ -134,6 +135,16 @@ Route::middleware('admin')->group(function () {
             Route::post('/update/gallery', 'UpdateGallery')->name('gallery.update');
             Route::get('/delete/gallery/{id}', 'DeleteGallery')->name('delete.gallery');
             Route::get('/changeStatus', 'ChangeStatus');
+        });
+
+        Route::controller(CouponController::class)->group(function(){
+            Route::get('/all/coupon', 'AllCoupon')->name('all.coupon');
+            Route::get('/add/gallery', 'AddGallery')->name('add.gallery');
+            Route::post('/store/gallery', 'StoreGallery')->name('gallery.store');
+            Route::get('/edit/gallery/{id}', 'EditGallery')->name('edit.gallery');
+            Route::post('/update/gallery', 'UpdateGallery')->name('gallery.update');
+            Route::get('/delete/gallery/{id}', 'DeleteGallery')->name('delete.gallery');
+            
         });
     });
     
