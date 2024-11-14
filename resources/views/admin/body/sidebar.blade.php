@@ -89,7 +89,7 @@
                     </a>
                 </li>
                 <li>
-                    <a href="{{ route('admin.add.product') }}">
+                    <a href="{{ route('approve.restaurant') }}">
                         <span data-key="t-chat">Approve Restaurant</span>
                     </a>
                 </li> 

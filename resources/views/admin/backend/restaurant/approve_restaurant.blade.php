@@ -8,7 +8,7 @@
         <div class="row">
             <div class="col-12">
                 <div class="page-title-box d-sm-flex align-items-center justify-content-between">
-                    <h4 class="mb-sm-0 font-size-18">Pending Restaurant</h4>
+                    <h4 class="mb-sm-0 font-size-18">Approve Restaurant</h4>
                     
                 </div>
             </div>
@@ -47,8 +47,8 @@
                     @endif
                 </td>
                 
-                <td> 
-                    <input data-id="{{$item->id}}" class="toggle-class" type="checkbox" data-onstyle="success" data-offstyle="danger" data-toggle="toggle" data-on="Active" data-off="Inactive" {{ $item->status ? 'checked' : '' }}>
+        <td> 
+        <input data-id="{{$item->id}}" class="toggle-class" type="checkbox" data-onstyle="success" data-offstyle="danger" data-toggle="toggle" data-on="Active" data-off="Inactive" {{ $item->status ? 'checked' : '' }}>
                 </td> 
             </tr>
             @endforeach    

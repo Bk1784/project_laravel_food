@@ -104,8 +104,9 @@ Route::middleware('admin')->group(function () {
        
     });
     Route::controller(ManageController::class)->group(function(){
-        Route::get('/pending/restaurant', 'PendingRestaurant')->name('pending.restaurant'); 
-       
+        Route::get('/pending/restaurant', 'PendingRestaurant')->name('pending.restaurant');
+        Route::get('/clientchangeStatus', 'ClientChangeStatus');  
+        Route::get('/approve/restaurant', 'ApproveRestaurant')->name('approve.restaurant'); 
     });
 
 });
