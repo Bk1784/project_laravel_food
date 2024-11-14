@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Admin\ManageController;
 use App\Http\Controllers\Client\CouponController;
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
@@ -93,6 +94,16 @@ Route::middleware('admin')->group(function () {
         Route::post('/update/city', 'UpdateCity')->name('city.update');
         Route::get('/delete/city/{id}', 'DeleteCity')->name('delete.city');
     }); 
+    Route::controller(ManageController::class)->group(function(){
+        Route::get('/admin/all/product', 'AdminAllProduct')->name('admin.all.product');
+        Route::get('/add/product', 'AddProduct')->name('add.product');
+        Route::post('/store/product', 'StoreProduct')->name('product.store');
+        Route::get('/edit/product/{id}', 'EditProduct')->name('edit.product');
+        Route::post('/update/product', 'UpdateProduct')->name('product.update');
+        Route::get('/delete/product/{id}', 'DeleteProduct')->name('delete.product');
+        Route::get('/changeStatus', 'ChangeStatus');
+    });
+
 });
 
 
@@ -146,6 +157,8 @@ Route::middleware('admin')->group(function () {
             Route::get('/delete/coupon/{id}', 'DeleteCoupon')->name('delete.coupon');
             
         });
+
+     
     });
     
    
