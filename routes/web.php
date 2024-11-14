@@ -103,6 +103,10 @@ Route::middleware('admin')->group(function () {
         Route::get('/admin/delete/product/{id}', 'AdminDeleteProduct')->name('admin.delete.product');
        
     });
+    Route::controller(ManageController::class)->group(function(){
+        Route::get('/pending/restaurant', 'PendingRestaurant')->name('pending.restaurant'); 
+       
+    });
 
 });
 
