@@ -69,7 +69,7 @@
                     </a>
                 </li>
                 <li>
-                    <a href="{{ route('add.category') }}">
+                    <a href="{{ route('admin.add.product') }}">
                         <span data-key="t-chat">Add Product</span>
                     </a>
                 </li> 
