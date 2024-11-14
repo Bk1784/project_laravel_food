@@ -47,15 +47,16 @@
                 <td>{{ $item->qty }}</td>
                 <td>{{ $item->price }}</td>                
                 <td>
-        @if ($item->discount_price == NULL)
-            <span class="badge bg-danger">No Discount</span>
-            @else
-            @php
-                $amount = $item->price - $item->discount_price;
-                $discount = ($amount / $item->price) * 100; 
-            @endphp 
-             <span class="badge bg-danger">{{ round($discount) }}%</span>
-        @endif </td>
+                @if ($item->discount_prize == NULL)
+                        <span class="badge bg-danger">No Discount</span>
+                        @else
+                        @php
+                            $amount = $item->price - $item->discount_prize;
+                            $discount = ($amount / $item->price) * 100;
+                        @endphp 
+                         <span class="badge bg-danger">{{ round($discount) }}%</span>                   
+                @endif
+                </td>
                 <td> 
                     @if ($item->status == 1)
                     <span class="text-success"><b>Active</b></span>
@@ -65,7 +66,7 @@
                 </td>
                 
         <td><a href="{{ route('admin.edit.product',$item->id) }}" class="btn btn-info waves-effect waves-light"> <i class="fas fa-edit"></i> </a>
-        <a href="{{ route('delete.product',$item->id) }}" class="btn btn-danger waves-effect waves-light" id="delete"><i class="fas fa-trash"></i></a>
+        <a href="{{ route('admin.delete.product',$item->id) }}" class="btn btn-danger waves-effect waves-light" id="delete"><i class="fas fa-trash"></i></a>
         <input data-id="{{$item->id}}" class="toggle-class" type="checkbox" data-onstyle="success" data-offstyle="danger" data-toggle="toggle" data-on="Active" data-off="Inactive" {{ $item->status ? 'checked' : '' }}>
                 </td> 
             </tr>
