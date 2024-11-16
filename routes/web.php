@@ -31,7 +31,8 @@ Route::middleware('auth')->group(function () {
     Route::post('/user/password/update', [UserController::class, 'UserPasswordUpdate'])->name('user.password.update');
     Route::get('/profile/edit', [UserController::class, 'ProfileEdit'])->name('profile.edit');
 
-   
+   // Get Wishlist data for user 
+   Route::get('/all/wishlist', [HomeController::class, 'AllWishlist'])->name('all.wishlist');
 });
 
 require __DIR__.'/auth.php';
