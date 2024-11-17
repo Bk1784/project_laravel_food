@@ -133,7 +133,7 @@ $coupons = App\Models\Coupon::where('client_id',$client->id)->where('status','1'
                                           <a class="btn btn-link btn-sm text-black" href="#">${{$bestseller->discount_prize}}  </a> 
                                        @endif 
                                           <span class="float-right"> 
-                                        <a class="btn btn-outline-secondary btn-sm" href="#">ADD</a>
+                                        <a class="btn btn-outline-secondary btn-sm" href="{{ route('add_to_cart',$bestseller->id)}}">ADD</a>
                                         </span>
                                      </p>
                                   </div>
@@ -151,17 +151,13 @@ $coupons = App\Models\Coupon::where('client_id',$client->id)->where('status','1'
                                
                             <div class="menu-list p-3 border-bottom">
                               @foreach ($menu->products as $product) 
-                                  <a class="btn btn-outline-secondary btn-sm  float-right" href="#">ADD</a>
+                                  <a class="btn btn-outline-secondary btn-sm  float-right" href="{{ route('add_to_cart',$bestseller->id)}}">ADD</a>
                                  
                                   <div class="media">
                                      <img class="mr-3 rounded-pill" src="{{ asset($product->image)}}" alt="Generic placeholder image">
                                      <div class="media-body">
                                      <h6 class="mb-1">{{$product->name}}</h6>
-                                       @if ($product->size == NULL)
-                                          <p class="text-gray mb-0"> </p>
-                                       @else    
-                                          <p class="text-gray mb-0"> ({{$product->size}} cm)</p>
-                                       @endif
+                                     <p class="text-gray mb-0">Rp. {{ $product->price }} ({{ $product->size ?? '' }} cm)</p>
                                      </div>
                                   </div>
                                </div>
