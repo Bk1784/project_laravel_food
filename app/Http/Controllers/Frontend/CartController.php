@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Frontend;
 use App\Http\Controllers\Controller;
 use App\Models\Product;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Session; 
 
 class CartController extends Controller
 {
@@ -37,15 +38,16 @@ class CartController extends Controller
 
     public function updateCartQuanity(Request $request){
         $cart = session()->get('cart',[]);
+
         if (isset($cart[$request->id])) {
            $cart[$request->id]['quantity'] = $request->quantity;
            session()->put('cart',$cart);
         }
-        $notification = array(
-            'message' => 'Cart Updated Successfully',
+        return response()->json([
+            'message' => 'Quantity Updated',
             'alert-type' => 'success'
-        );
-        return redirect()->back()->with($notification);
+           ]);
+    
     }
      //End Method 
 
@@ -55,11 +57,10 @@ class CartController extends Controller
            unset($cart[$request->id]);
            session()->put('cart',$cart);
         }
-        $notification = array(
-            'message' => 'Product Remove Successfully',
+        return response()->json([
+            'message' => 'Cart Remove Successfully',
             'alert-type' => 'success'
-        );
-        return redirect()->back()->with($notification);
+           ]);
      }
       //End Method 
 }

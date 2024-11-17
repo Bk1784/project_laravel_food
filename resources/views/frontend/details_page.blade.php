@@ -1,6 +1,7 @@
 @extends('frontend.dashboard.dashboard')
 @section('dashboard')
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
 @php
 $products = App\Models\Product::where('client_id',$client->id)->limit(3)->get();
 $menuNames = $products->map(function($product){
@@ -465,6 +466,19 @@ $coupons = App\Models\Coupon::where('client_id',$client->id)->where('status','1'
 
  <script>
    $(document).ready(function() {
+      
+      const Toast = Swal.mixin({
+         toast: true,
+         position: 'top-end',
+         showConfirmButton: false,
+         timer: 1500,
+         timerProgressBar: true,
+         didOpen: (toast) => {
+            toast.addEventListener('mouseenter', Swal.stopTimer);
+            toast.addEventListener('mouseleave', Swal.resumeTimer);
+         }
+      });
+
       $('.inc').on('click', function() {
          var id = $(this).data('id');
          var input = $(this).closest('span').find('input');
@@ -495,7 +509,12 @@ $coupons = App\Models\Coupon::where('client_id',$client->id)->where('status','1'
                quantity: quantity
             },
             success: function(response){
-               location.reload();
+               Toast.fire({
+                  icon: 'success',
+                  title: 'Quantity Updated'
+               }).then(() => {
+                  location.reload();
+               });
             }
          })
       }
@@ -509,7 +528,12 @@ $coupons = App\Models\Coupon::where('client_id',$client->id)->where('status','1'
                id: id
             },
             success: function(response){
-               location.reload();
+               Toast.fire({
+                  icon: 'success',
+                  title: 'Cart Remove Successfully'
+               }).then(() => {
+                  location.reload();
+               });
             }
          });
       }
