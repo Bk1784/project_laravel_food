@@ -452,6 +452,19 @@ $coupons = App\Models\Coupon::where('client_id',$client->id)->where('status','1'
                    
                    
                 </div>
+
+               <div class="mb-2 bg-white rounded p-2 clearfix">
+                  <div class="input-group input-group-sm mb-2">
+                     <input type="text" class="form-control" placeholder="Enter promo code" id="coupon_name">
+                     <div class="input-group-append">
+                        <button class="btn btn-primary" type="submit" id="button-addon2" onclick="ApplyCoupon()" ><i class="icofont-sale-discount"></i> APPLY</button>
+                     </div>
+                  </div> 
+               </div>
+
+
+
+
                 <div class="mb-2 bg-white rounded p-2 clearfix">
                 <img class="img-fluid float-left" src="{{ asset('frontend/img/wallet-icon.png') }}">
                    <h6 class="font-weight-bold text-right mb-2">Subtotal : <span class="text-danger">Rp. {{ $total }}</span></h6>

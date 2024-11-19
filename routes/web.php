@@ -190,7 +190,7 @@ Route::middleware(['client','status'])->group(function () {
         Route::get('/add_to_cart/{id}', 'AddToCart')->name('add_to_cart');
         Route::post('/cart/update-quantity', 'updateCartQuanity')->name('cart.updateQuantity');
         Route::post('/cart/remove', 'CartRemove')->name('cart.remove');  
-
+        Route::post('/apply-coupon', 'ApplyCoupon');
     });
     
    

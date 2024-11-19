@@ -81,6 +81,48 @@
          });
 </script>
 
+// APPLY COUPON START
+
+<script>
+    function ApplyCoupon() {
+      var coupon_name = $('#coupon_name').val();
+      $.ajax({
+         type: "POST",
+         dataType: "json",
+         data:{coupon_name:coupon_name},
+         url:"/apply-coupon",
+         success:function(data){
+            
+             // Start Message 
+             const Toast = Swal.mixin({
+                  toast: true,
+                  position: 'top-end',
+                  
+                  showConfirmButton: false,
+                  timer: 3000 
+            })
+            if ($.isEmptyObject(data.error)) {
+                    
+                    Toast.fire({
+                    type: 'success',
+                    icon: 'success', 
+                    title: data.success, 
+                    })
+            }else{
+               
+           Toast.fire({
+                    type: 'error',
+                    icon: 'error', 
+                    title: data.error, 
+                    })
+                }
+              // End Message 
+         }
+      })
+    }
+</script>
+
+
 
    </body>
 </html>
