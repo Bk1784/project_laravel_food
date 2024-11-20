@@ -191,6 +191,7 @@ Route::middleware(['client','status'])->group(function () {
         Route::post('/cart/update-quantity', 'updateCartQuanity')->name('cart.updateQuantity');
         Route::post('/cart/remove', 'CartRemove')->name('cart.remove');  
         Route::post('/apply-coupon', 'ApplyCoupon');
+        Route::get('/remove-coupon', 'CouponRemove');
     });
     
    
