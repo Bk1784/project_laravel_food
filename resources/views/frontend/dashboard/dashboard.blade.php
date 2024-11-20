@@ -72,13 +72,13 @@
  }
  @endif 
 </script>
-<script>
-      <script type="text/javascript">
-         $.ajaxSetup({
-            headers:{
-               'X-CSRF-TOKEN':$('meta[name="csrf-token"]').attr('content')
-            }
-         });
+
+<script type="text/javascript">
+   $.ajaxSetup({
+      headers:{
+         'X-CSRF-TOKEN':$('meta[name="csrf-token"]').attr('content')
+      }
+   });
 </script>
 
 // APPLY COUPON START
