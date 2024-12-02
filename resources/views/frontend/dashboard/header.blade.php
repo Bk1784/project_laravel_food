@@ -49,15 +49,15 @@
                   @endauth
 
                   @php
-      $total = 0;
-      $cart = session()->get('cart',[]);
-      $groupedCart = [];
-      foreach ($cart as $item) {
-         $groupedCart[$item['client_id']][] = $item;
-      }
+                     $total = 0;
+                     $cart = session()->get('cart',[]);
+                     $groupedCart = [];
+                     foreach ($cart as $item) {
+                        $groupedCart[$item['client_id']][] = $item;
+                     }
 
-      $clients = App\Models\Client::whereIn('id',array_keys($groupedCart))->get()->keyBy('id');
-      @endphp
+                     $clients = App\Models\Client::whereIn('id',array_keys($groupedCart))->get()->keyBy('id');
+                  @endphp
 
 
                   <li class="nav-item dropdown dropdown-cart">
@@ -80,16 +80,28 @@
                      @endif
                      @endforeach
 
-                        <div class="dropdown-cart-top-body border-top p-4">
-                           <p class="mb-2"><i class="icofont-ui-press text-danger food-item"></i> Chicken Tikka Sub 12" (30 cm) x 1   <span class="float-right text-secondary">$314</span></p>
-                          
-                        </div>
+                     @php $total = 0 @endphp
+                     @if (session('cart'))
+                     @foreach (session('cart') as $id => $details) 
+                     @php
+                        $total += $details['price'] * $details['quantity']
+                     @endphp 
+                     
+                     <p class="mb-2"><i class="icofont-ui-press text-danger food-item"></i>{{ $details['name'] }} x {{  $details['quantity'] }}   <span class="float-right text-secondary">Rp{{ $details['price'] * $details['quantity'] }}</span></p>
+                     @endforeach
+                     @endif
+
                         <div class="dropdown-cart-top-footer border-top p-4">
-                           <p class="mb-0 font-weight-bold text-secondary">Sub Total <span class="float-right text-dark">$499</span></p>
-                           <small class="text-info">Extra charges may apply</small>  
+                        <p class="mb-0 font-weight-bold text-secondary">Sub Total <span class="float-right text-dark"> 
+                        @if (Session::has('coupon'))
+                        Rp{{ Session()->get('coupon')['discount_amount'] }}
+                        @else
+                        Rp{{ $total }}
+                        @endif
+                        </span></p>
                         </div>
                         <div class="dropdown-cart-top-footer border-top p-2">
-                           <a class="btn btn-success btn-block btn-lg" href="checkout.html"> Checkout</a>
+                        <a class="btn btn-success btn-block btn-lg" href="{{ route('checkout') }}"> Checkout</a>
                         </div>
                      </div>
                   </li>

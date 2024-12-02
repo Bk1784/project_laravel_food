@@ -577,7 +577,7 @@ $coupons = App\Models\Coupon::where('client_id',$client->id)->where('status','1'
 
       function removeFromCart(id){
          $.ajax({
-            url: '{{ route("cart.remove") }}',
+            url: '{{ route('cart.remove') }}',
             method: 'POST',
             data: {
                _token: '{{ csrf_token() }}',
