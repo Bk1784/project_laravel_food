@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Models\Order;
+use App\Models\OrderItem;
 use Illuminate\Http\Request;
 
 class ManageOrderController extends Controller
@@ -29,4 +30,13 @@ class ManageOrderController extends Controller
     }
     //End Method 
 
+    public function AdminOrderDetails($id){
+        $order = Order::with('user')->where('id',$id)->first();
+        $orderItem = OrderItem::with('product')->where('order_id',$id)->orderBy('id','desc')->get();
+        $totalPrice = 0;
+        foreach($orderItem as $item){
+            $totalPrice += $item->price * $item->qty;
+        }
+        return view('admin.backend.order.admin_order_details',compact('order','orderItem','totalPrice'));
+    } //End Method 
 }
