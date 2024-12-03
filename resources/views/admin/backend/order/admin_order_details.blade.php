@@ -124,7 +124,88 @@
             </div>
         </div>
     </div> <!-- end col -->
+
+
+
 </div> <!-- end row --> 
+<div class="row row-cols-1 row-cols-md-1 row-cols-lg-2 row-cols-xl-1">
+    <div class="col">
+        <div class="card">
+        <div class="table-responsive">
+            <table class="table">
+                <tbody>
+                    <tr>
+                        <td class="col-md-1">
+                            <label>Image</label>
+                        </td>
+                        <td class="col-md-1">
+                            <label>Product Name</label>
+                        </td>
+                        <td class="col-md-1">
+                            <label>Restruatnt Name </label>
+                        </td>
+                        <td class="col-md-1">
+                            <label>Product Code</label>
+                        </td>
+                        <td class="col-md-1">
+                            <label>Quantity</label>
+                        </td>
+                        <td class="col-md-1">
+                            <label>Price</label>
+                        </td> 
+                    </tr>
+    @foreach ($orderItem as $item)
+    <tr>
+        <td class="col-md-1">
+            <label>
+                <img src="{{ asset($item->product->image) }}" style="width:50px; height:50px">
+            </label>
+        </td>
+        <td class="col-md-2">
+            <label>
+                {{ $item->product->name }}
+            </label>
+        </td>
+        @if ($item->client_id == NULL)
+        <td class="col-md-2">
+            <label>
+               Owner
+            </label>
+        </td>
+        @else
+        <td class="col-md-2">
+            <label>
+                {{ $item->product->client->name }}
+            </label>
+        </td>
+        @endif
+        <td class="col-md-2">
+            <label>
+                {{ $item->product->code }}
+            </label>
+        </td>
+        <td class="col-md-2">
+            <label>
+                {{ $item->qty }}
+            </label>
+        </td>
+        <td class="col-md-2">
+            <label>
+                {{ $item->price }} <br> Total = $ {{ $item->price * $item->qty }}
+            </label>
+        </td> 
+    </tr> 
+    @endforeach 
+                </tbody>
+            </table>
+    <div>
+        <h4>Total Price: $ {{ $totalPrice }}</h4>
+    </div>
+
+        </div>
+        </div>
+    </div>
+</div>
 
          
     </div> <!-- container-fluid -->
