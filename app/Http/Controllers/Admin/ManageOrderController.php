@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use App\Models\Order;
 use App\Models\OrderItem;
+use Auth;
 use Illuminate\Http\Request;
 
 class ManageOrderController extends Controller
@@ -67,4 +68,14 @@ class ManageOrderController extends Controller
         return redirect()->route('deliverd.order')->with($notification);
     }
     //End Method 
+
+    public function AllClientOrders(){
+        $clientId = Auth::guard('client')->id();
+        $orderItemGroupData = OrderItem::with(['product','order'])->where('client_id',$clientId)
+        ->orderBy('order_id','desc')
+        ->get()
+        ->groupBy('order_id');
+        return view('client.backend.order.all_orders',compact('orderItemGroupData'));
+    }
+      //End Method 
 }
