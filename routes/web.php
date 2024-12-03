@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\Admin\ManageController;
+use App\Http\Controllers\Admin\ManageOrderController;
 use App\Http\Controllers\Client\CouponController;
 use App\Http\Controllers\Frontend\CartController;
 use App\Http\Controllers\Frontend\HomeController;
@@ -119,6 +120,12 @@ Route::middleware('admin')->group(function () {
         Route::post('/banner/update', 'BannerUpdate')->name('banner.update'); 
         Route::get('/delete/banner/{id}', 'DeleteBanner')->name('delete.banner'); 
     });
+
+    Route::controller(ManageOrderController::class)->group(function(){
+        Route::get('/pending/order', 'PendingOrder')->name('pending.order'); 
+        
+    });
+
 
 });
 
