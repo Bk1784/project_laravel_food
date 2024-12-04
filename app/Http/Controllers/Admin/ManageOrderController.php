@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Models\Order;
 use App\Models\OrderItem;
 use Auth;
+use Barryvdh\DomPDF\Facade\Pdf;
 use Illuminate\Http\Request;
 
 class ManageOrderController extends Controller
@@ -107,4 +108,20 @@ class ManageOrderController extends Controller
         return view('frontend.dashboard.order.order_details',compact('order','orderItem','totalPrice'));
     }
      //End Method 
+
+     public function UserInvoiceDownload($id){
+        $order = Order::with('user')->where('id',$id)->where('user_id',Auth::id())->first();
+        $orderItem = OrderItem::with('product')->where('order_id',$id)->orderBy('id','desc')->get();
+        $totalPrice = 0;
+        foreach($orderItem as $item){
+            $totalPrice += $item->price * $item->qty;
+        }
+        $pdf = Pdf::loadView('frontend.dashboard.order.invoice_download',compact('order','orderItem','totalPrice'))->setPaper('a4')->setOption([
+            'tempDir' => public_path(),
+            'chroot' => public_path(),
+        ]);
+        return $pdf->download('invoice.pdf');        
+    }
+     //End Method 
+
 }
