@@ -40,8 +40,8 @@ Route::middleware('auth')->group(function () {
 
    Route::controller(ManageOrderController::class)->group(function(){
     Route::get('/user/order/list', 'UserOrderList')->name('user.order.list'); 
-    Route::get('/user/order/details/{id}', 'UserOrderDetails')->name('user.order.details');
-    Route::get('/user/invoice/download/{id}', 'UserInvoiceDownload')->name('user.invoice.download'); 
+   Route::get('/user/order/details/{id}', 'UserOrderDetails')->name('user.order.details');
+        Route::get('/user/invoice/download/{id}', 'UserInvoiceDownload')->name('user.invoice.download'); 
     });
 });
 
@@ -140,10 +140,7 @@ Route::middleware('admin')->group(function () {
         Route::get('/confirm_to_processing/{id}', 'ConfirmToProcessing')->name('confirm_to_processing'); 
         Route::get('/processing_to_deliverd/{id}', 'ProcessingToDiliverd')->name('processing_to_deliverd'); 
     });
-    Route::controller(ManageOrderController::class)->group(function(){
-        Route::get('/all/client/orders', 'AllClientOrders')->name('all.client.orders'); 
-        Route::get('/client/order/details/{id}', 'ClientOrderDetails')->name('client.order.details'); 
-    });
+    
 });
 
 
@@ -197,8 +194,10 @@ Route::middleware(['client','status'])->group(function () {
             Route::get('/delete/coupon/{id}', 'DeleteCoupon')->name('delete.coupon');
             
         });
-
-     
+        Route::controller(ManageOrderController::class)->group(function(){
+            Route::get('/all/client/orders', 'AllClientOrders')->name('all.client.orders'); 
+            Route::get('/client/order/details/{id}', 'ClientOrderDetails')->name('client.order.details'); 
+        });
     });
 
     //that will be for all user
