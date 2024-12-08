@@ -21,4 +21,19 @@ class ReportController extends Controller
         return view('admin.backend.report.search_by_date',compact('orderDate','formatDate'));
     }
       // End Method 
+
+      public function AminSearchByMonth(Request $request){
+        $month = $request->month;
+        $years = $request->year_name;
+        $orderMonth = Order::where('order_month',$month)->where('order_year',$years)->latest()->get();
+        return view('admin.backend.report.search_by_month',compact('orderMonth','month','years'));
+    }
+     // End Method 
+
+     public function AminSearchByYear(Request $request){ 
+        $years = $request->year;
+        $orderYear = Order::where('order_year',$years)->latest()->get();
+        return view('admin.backend.report.search_by_year',compact('orderYear','years'));
+    }
+     // End Method 
 }
