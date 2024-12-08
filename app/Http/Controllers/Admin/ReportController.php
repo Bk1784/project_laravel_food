@@ -36,4 +36,9 @@ class ReportController extends Controller
         return view('admin.backend.report.search_by_year',compact('orderYear','years'));
     }
      // End Method 
+
+     public function ClientAllReports(){
+        return view('client.backend.report.all_report');
+    }
+    // End Method 
 }
