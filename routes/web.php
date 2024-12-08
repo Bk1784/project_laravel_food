@@ -142,7 +142,7 @@ Route::middleware('admin')->group(function () {
         Route::get('/processing_to_deliverd/{id}', 'ProcessingToDiliverd')->name('processing_to_deliverd'); 
     });
     Route::controller(ReportController::class)->group(function(){
-        Route::get('/admin/all/reports', 'AminAllReports')->name('admin.all.reports'); 
+        Route::get('/admin/all/reports', 'AdminAllReports')->name('admin.all.reports'); 
     });
     
 });
