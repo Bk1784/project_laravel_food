@@ -7,6 +7,7 @@ use App\Http\Controllers\Client\CouponController;
 use App\Http\Controllers\Frontend\CartController;
 use App\Http\Controllers\Frontend\HomeController;
 use App\Http\Controllers\Frontend\OrderController;
+use App\Http\Controllers\Frontend\ReviewController;
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AdminController;
@@ -236,6 +237,11 @@ Route::middleware(['client','status'])->group(function () {
     Route::controller(OrderController::class)->group(function(){
         Route::post('/cash_order', 'CashOrder')->name('cash_order');
        
+    });
+
+    Route::controller(ReviewController::class)->group(function(){
+        Route::post('/store/review', 'StoreReview')->name('store.review');  
+        
     });
     
    
