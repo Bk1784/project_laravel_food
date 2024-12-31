@@ -344,6 +344,8 @@ $coupons = App\Models\Coupon::where('client_id',$client->id)->where('status','1'
                       <div class="bg-white rounded shadow-sm p-4 mb-4 restaurant-detailed-ratings-and-reviews">
       <a href="#" class="btn btn-outline-primary btn-sm float-right">Top Rated</a>
       <h5 class="mb-1">All Ratings and Reviews</h5>
+
+
    
    @php
       $reviews = App\Models\Review::where('client_id',$client->id)->where('status',1)->latest()->limit(5)->get();
